@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 
 type MessageProps = {
     text: string,
@@ -6,6 +7,22 @@ type MessageProps = {
 
 
 function Message(props: MessageProps){
+
+    console.log("rendering Message...");
+
+
+    useEffect(() => {
+
+        console.log("useEffect on mount");
+
+
+        return () => {
+            console.log("useEffect on ummount");
+        }
+
+    }, []);
+
+
     return (
         <div>
             <h4 style={{color: props.color}}>Message: {props.text}</h4>
