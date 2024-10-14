@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.38/browser.js" integrity="sha512-/1uYu3K5HmOTNdhaOt6Rh7qQgLk/zn0kfw4nqNtqbpACxAx2tKp+lXJ4tnx3zn0vMq4n97+1eKI0vfdU0x+NHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <title>React</title>
+</head>
+<body>
+    <h4>React Application</h4>
+    <div id="app1"></div>
+    <div id="app2"></div>
+    <div id="app3"></div>
+    <div id="app4"></div>
+
+    <button>Click Me</button>
+
+    <script type="text/babel">
+        // react library => object called React
+        // react-dom library => object called ReactDOM
+
+        //Generate some HTML
+        // generate: <div>This is a react element</div>
+        const element1 = React.createElement("div", null, "This is a react element");
+        ReactDOM.createRoot(document.getElementById("app1")).render(element1);
+
+         // generate: <div><h4>This is a react element</h4></div>
+         //const element2 = React.createElement("div", null, "<h4>This is a react element</h4>");
+         const element2 = React.createElement("div", null, React.createElement("h4", null, "This is complex element"));
+         ReactDOM.createRoot(document.getElementById("app2")).render(element2);
+
+
+         // generate: <div><h4>This is a jsx generated element</h4></div>
+         ReactDOM.createRoot(document.getElementById("app3")).render(<div><h4>This is a jsx generated element</h4></div>);
+
+
+         // generate: <div><h4>This is a jsx generated element</h4></div>
+         //components(function/class)
+
+         function MyComponent(){
+            //return the presentation(jsx)
+
+            return (
+                <div style={{border: '1px solid blue'}}>
+                    <h4>This is a React component</h4>
+                    <p>This is a functional component</p>
+                </div>
+            );
+         }
+
+         ReactDOM.createRoot(document.getElementById("app4")).render(<MyComponent/>)
+
+
+
+
+    </script>
+</body>
+</html>
