@@ -1,7 +1,8 @@
 'use client'
 
-import { useState, MouseEvent } from "react";
+import { useState, MouseEvent, useRef, useEffect } from "react";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 function LoginPage(){
 
@@ -9,6 +10,13 @@ function LoginPage(){
     const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState("");
+    const userNameInputRef = useRef<HTMLInputElement>(null);
+    const router = useRouter();
+
+    useEffect(() => {
+        userNameInputRef.current?.focus();
+    }, []);
+
 
     async function signin(evt: MouseEvent){
 
@@ -31,6 +39,7 @@ function LoginPage(){
                 const resp = await axios.post(url, {name: userName, password});
                 console.log("sucsess", resp);
                 setMessage("");
+                router.push("/products");
 
             } catch (error) {
                 console.log("error", error);
@@ -54,7 +63,7 @@ function LoginPage(){
             <form>
                 <div className="form-group">
                     <label htmlFor="name">UserName</label>
-                    <input id="name" className="form-control" value={userName} 
+                    <input ref={userNameInputRef} id="name" className="form-control" value={userName} 
                                                     onChange={e => setUserName(e.target.value)}/>
                 </div>
 
