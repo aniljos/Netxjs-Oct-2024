@@ -1,0 +1,100 @@
+
+Project structure
+	package.json: npm configuration file: depedencies, scripts
+	
+	node_modules: folder with all the dependencies
+	tsconfig.json: typescript config 
+	next.config.mjs: Nextjs configuration file: API routes behavior, react code behavior, 
+	eslint.rc.json: eslint config file
+	
+	src: folder is optional, contains the source code.
+	app: folder defines the navigation(App Router)
+	pages: folder defines the navigation(Pages Router)
+	
+	public: folder for any static assets(images, icons)
+	
+	layout.tsx: React component: The defines the layout of the application
+	page.tsx: 
+		Resides in the app folder
+		The component to be rendered when the path is root path: (http://localhost:3001/)
+		
+		
+		
+Component in Nextjs
+		Act as pages => Defined in the app folder
+		Designed to be reuseable components => can be located anywhere
+		
+JSX is like JS expressions
+	var x = 5, y = 9
+	var z = x + y;
+	var jsx = (<p>This is JSX as an expression</p>)
+	
+Event handling
+	HTML
+		<button onclick="foo()"></button>
+		
+	React
+		<button onClick={foo}></button>
+		
+		
+Nextjs 13 and above
+	All components are server componnents by default
+	Prior to Nextjs all components were client componet by default
+	In Nextjs 13 onwards use the directive 'use client' to create client components
+	
+
+React State:
+	State updates are asynchronous
+	State updated are batched(feature introduced in React 18)
+		setCounter(counter + 1);  => counter : 5 ==> Set the counter 6
+        setCounter(counter + 1);  => counter : 5 ==> Set the counter 6
+		
+		setCounter (prevCounter => prevCounter + 1); => counter : 5 ==> Invoke the callback(prevCounter)
+        setCounter (prevCounter => prevCounter + 1); =>  counter : 6 ==> Invoke the callback(prevCounter)
+	State should always be treated as immutable
+		
+useEffect: Lifecycle events: mount, update & unmount
+
+	Signature: useEffect(callback, [list of dependencies]);
+	If the list of depedencies is empty then the callback is invoked on component mount(only once).
+	In the callback of the useEffect for mount, the callback returned is invoked on unmount.
+	
+	If the list of depedencies is not empty then the callback is invoked on component update(can be called multiple times).
+	
+	
+html
+	head
+		meta
+		title
+	body
+		[content] - layout
+	
+	
+	
+Form Fields(input/checkbox. text area)
+
+	- Controlled input : state(useState) is bound to the form field
+	- Uncontrolled input : ref(useRef) to the form field-read or the set the value
+	
+Browser
+    -For Http calls: XMLHttpRequest object, fetch api(HTML 5)
+	
+Promise: 
+		A object which acts like a proxy
+		Handle the promise using "then" method
+		
+async & await keywords
+		Used with promise
+		To write asynchronous code in a  sycncronous manner
+		
+css
+	css class <div class="">
+	style <div style="color: blue">
+	
+Redux:
+	Action: an object, { type: 'update_the_counter', value: 10}, { type: 'clear_the_counter'}
+	Reducer: is a function, that receives an action and updates the store
+	
+Use Redux
+	libraries: npm i redux react-redux @reduxjs/toolkit
+	
