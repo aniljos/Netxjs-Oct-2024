@@ -19,6 +19,8 @@ function Counter(props: CounterProps){
     }, [counter])
 
     function inc(){
+
+       
         console.log("inc invoked");
         //setCounter(counter + 1);
         //setCounter(counter + 1);
