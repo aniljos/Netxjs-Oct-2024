@@ -1,17 +1,46 @@
 'use client'
 
 import { useState, MouseEvent } from "react";
+import axios from "axios";
 
 function LoginPage(){
 
 
     const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
+    const [message, setMessage] = useState("");
 
-    function signin(evt: MouseEvent){
+    async function signin(evt: MouseEvent){
 
         evt.preventDefault();
-        console.log("in signin..");
+        if(userName && password){
+            //validate credentials
+
+            
+            const url = "http://localhost:9000/login"
+            // axios
+            //     .post(url, {name: userName, password})
+            //     .then((resp) => {
+            //         console.log("sucsess", resp);
+            //     }, (error) => {
+            //         console.log("error", error)
+            //     })
+
+            try {
+                
+                const resp = await axios.post(url, {name: userName, password});
+                console.log("sucsess", resp);
+                setMessage("");
+
+            } catch (error) {
+                console.log("error", error);
+                setMessage("Invalid credentials");
+            }
+        }
+        else{
+
+            setMessage("Enter the credentials");
+        }
 
 
     }
@@ -19,6 +48,8 @@ function LoginPage(){
     return (
         <div>
             <h4>Login</h4>
+
+            {message ? <div className="alert alert-danger">{message}</div> : null }
 
             <form>
                 <div className="form-group">
