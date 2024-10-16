@@ -4,20 +4,22 @@ import { useState, MouseEvent, useRef, useEffect } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
+import { useTitle } from "@/hooks/useTitle";
 
 function LoginPage(){
 
-
+    console.log("rendering login page");
     const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState("");
     const userNameInputRef = useRef<HTMLInputElement>(null);
     const router = useRouter();
     const dispatch = useDispatch();
+    useTitle("Login");
 
     useEffect(() => {
         userNameInputRef.current?.focus();
-        document.title = document.title + " " + "Login";
+        //document.title = document.title + " " + "Login";
 
     }, []);
 

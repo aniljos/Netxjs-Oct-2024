@@ -2,6 +2,7 @@
 
 import {ChangeEvent, useEffect, useState} from 'react';
 import Message from './Message';
+import {withBorder} from '@/hoc/withBorder';
 //Counter initialValue={5}/>
 type CounterProps = {
     initialValue: number
@@ -57,4 +58,4 @@ function Counter(props: CounterProps){
     )
 }
 
-export default Counter;
+export default withBorder(Counter);

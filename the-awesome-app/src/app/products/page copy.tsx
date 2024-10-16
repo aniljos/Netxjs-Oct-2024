@@ -8,16 +8,42 @@ import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
 import { AppState } from "@/redux/store";
 import { useTitle } from "@/hooks/useTitle";
-import { useFetchProducts } from "@/hooks/useFetchProducts";
 
 const baseUrl = "http://localhost:9000/secure_products";
 
 export default function ListProductsPage(){
     
-    const {products, fetchProducts} = useFetchProducts(baseUrl, true);
+    const [products, setProducts] = useState<Product[]>([]);
     const router = useRouter();
     const auth = useSelector((state: AppState) => state.auth);
     useTitle("Products");
+
+    useEffect(() => {
+
+        fetchProducts();
+
+    }, [])
+
+    async function fetchProducts(){
+
+
+        if(!auth.isAuthenticated){
+            router.push("/login");
+            return;
+        }
+
+        try {  
+
+            const headers = {Authorization: `Bearer ${auth.accessToken}`};
+            const resp = await axios.get<Product[]>(baseUrl, {headers});
+            setProducts(resp.data);
+            console.log("resp:", resp);
+
+        } catch (error) {
+            console.log("error:", error);
+        }
+
+    }
 
     async function deleteProduct(product: Product){
 

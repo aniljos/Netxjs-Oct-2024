@@ -6,6 +6,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import {addToCart as addToGadgetsCart} from '@/redux/gadgetsReducers';
 import ProductView from './components/ProductView';
+import { useTitle } from '@/hooks/useTitle';
 
 
 
@@ -16,6 +17,7 @@ function GadgetStore(){
     const [isMessageVisible, setMessageVisible] = useState(false);
 
     const dispatch = useDispatch();
+    useTitle("Gadgets");
     
     useEffect(() => {
 
