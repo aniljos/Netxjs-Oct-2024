@@ -4,7 +4,7 @@ import { Product } from '@/model/Product';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-
+import {addToCart as addToGadgetsCart} from '@/redux/gadgetsReducers';
 
 const baseUrl = "http://localhost:9000/products";
 function GadgetStore(){
@@ -31,7 +31,8 @@ function GadgetStore(){
     }
     function addToCart(product: Product): void {
         
-        dispatch({type: "addToCart", payload: new CartItem(product, 1)});
+        //dispatch({type: "addToCart", payload: new CartItem(product, 1)});
+        dispatch(addToGadgetsCart( new CartItem(product, 1)));
     }
 
     function renderProducts() {

@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import Link from "next/link";
+
 import ReduxProvider from "@/redux/ReduxProvider";
+import AppBar from "@/components/AppBar";
+import { AppThemeContextProvider } from "@/context/AppThemeContext";
 
 
 
@@ -32,34 +34,14 @@ export default function RootLayout({
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
 
         <ReduxProvider>
-          <div className="container">
-            <nav className="navbar navbar-dark bg-dark">
-              <div className="container-fluid">
-                <Link className="navbar-brand" href="/">Next</Link>
-
-                <ul className="nav">
-                  <li className="nav-item">
-                    <Link className="nav-link" href="/">Home</Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link className="nav-link" href="/about">About</Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link className="nav-link" href="/products">Products</Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link className="nav-link" href="/gadgets">Gadgets</Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link className="nav-link" href="/login">Login</Link>
-                  </li>
-                </ul>
-              </div>
-            </nav>
-            <main>
-              {children}
-            </main>
-          </div>
+          <AppThemeContextProvider>
+            <div className="container">
+              <AppBar />
+              <main>
+                {children}
+              </main>
+            </div>
+          </AppThemeContextProvider>
         </ReduxProvider>
       </body>
     </html>
