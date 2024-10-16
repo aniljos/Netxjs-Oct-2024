@@ -3,6 +3,7 @@
 import { useState, MouseEvent, useRef, useEffect } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
 
 function LoginPage(){
 
@@ -12,6 +13,7 @@ function LoginPage(){
     const [message, setMessage] = useState("");
     const userNameInputRef = useRef<HTMLInputElement>(null);
     const router = useRouter();
+    const dispatch = useDispatch();
 
     useEffect(() => {
         userNameInputRef.current?.focus();
@@ -39,11 +41,15 @@ function LoginPage(){
                 const resp = await axios.post(url, {name: userName, password});
                 console.log("sucsess", resp);
                 setMessage("");
+                //dispatch an action => store the tokens 
+                dispatch({type: "store_tokens", payload: {accessToken: resp.data.accessToken, refreshToken: resp.data.refreshToken, userName}})
                 router.push("/products");
 
             } catch (error) {
                 console.log("error", error);
                 setMessage("Invalid credentials");
+                //dispatch an action => clear the tokens 
+                dispatch({type: 'clear_tokens'});
             }
         }
         else{

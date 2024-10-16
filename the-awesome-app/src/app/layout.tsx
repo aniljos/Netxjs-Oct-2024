@@ -48,6 +48,9 @@ export default function RootLayout({
                     <Link className="nav-link" href="/products">Products</Link>
                   </li>
                   <li className="nav-item">
+                    <Link className="nav-link" href="/gadgets">Gadgets</Link>
+                  </li>
+                  <li className="nav-item">
                     <Link className="nav-link" href="/login">Login</Link>
                   </li>
                 </ul>

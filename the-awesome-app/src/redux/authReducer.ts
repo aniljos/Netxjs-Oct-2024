@@ -14,8 +14,19 @@ const initState: AuthState = {
 //reducer
 export const authReducer = (currentState=initState, action) => {
 
-    //TODO implement the logic
+     //return the updated state;
+    if(action.type === "store_tokens"){
 
-    //return the updated state;
+        return {
+            isAuthenticated: true,
+            userName: action.payload.userName,
+            accessToken: action.payload.accessToken,
+            refreshToken: action.payload.refreshToken,
+        }
+    }
+    if(action.type === "clear_tokens"){
+        return initState;
+    }
+   
     return currentState;
 }
