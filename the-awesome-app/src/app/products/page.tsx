@@ -2,7 +2,7 @@
 
 import { Product } from "@/model/Product";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import styles from './page.module.css'
 import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
@@ -48,7 +48,8 @@ export default function ListProductsPage(){
         try {
             
             const url = `${baseUrl}/${product.id}`;
-            await axios.delete(url);
+            const headers = {Authorization: `Bearer ${auth.accessToken}`};
+            await axios.delete(url, {headers});
             await fetchProducts();
             alert("Deleted record with id: " + product.id);
         } catch {
@@ -61,9 +62,22 @@ export default function ListProductsPage(){
         router.push("/products/" + product.id);
     }
 
+    const calculatedTotalPrice = useMemo( () => {
+
+        let total = 0;
+        products.forEach(p => {
+            total += p.price;
+        })
+        return total;
+    }, [products]);
+
     return (
         <div>
             <h4>List Products</h4>
+            <div>
+                Prices: {calculatedTotalPrice}
+            </div>
+
             <div style={{display: 'flex', flexFlow: 'row wrap', justifyContent: 'center'}}>
                 {products.map(product => {
 

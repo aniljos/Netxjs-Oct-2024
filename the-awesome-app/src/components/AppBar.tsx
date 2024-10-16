@@ -7,6 +7,10 @@ function AppBar(){
 
 
     const theme = useContext(AppThemeContext);
+
+    function switchTheme(){
+        theme.change(theme.mode === 'light'? 'dark': 'light');
+    }
     
     return (
         <nav className={`navbar navbar-${theme.mode} bg-${theme.mode}`}>
@@ -27,6 +31,9 @@ function AppBar(){
             </li>
             <li className="nav-item">
               <Link className="nav-link" href="/login">Login</Link>
+            </li>
+            <li className="nav-item">
+              <button className="btn btn-warning" onClick={switchTheme}>Switch Theme</button>
             </li>
           </ul>
         </div>

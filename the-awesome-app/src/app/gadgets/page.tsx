@@ -2,14 +2,19 @@
 import { CartItem } from '@/model/CartItem';
 import { Product } from '@/model/Product';
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import {addToCart as addToGadgetsCart} from '@/redux/gadgetsReducers';
+import ProductView from './components/ProductView';
+
+
 
 const baseUrl = "http://localhost:9000/products";
 function GadgetStore(){
 
     const [products, setProducts] = useState<Product[]>([]);
+    const [isMessageVisible, setMessageVisible] = useState(false);
+
     const dispatch = useDispatch();
     
     useEffect(() => {
@@ -29,11 +34,13 @@ function GadgetStore(){
         }
 
     }
-    function addToCart(product: Product): void {
+    const addToCart = useCallback( (product: Product): void => {
         
         //dispatch({type: "addToCart", payload: new CartItem(product, 1)});
         dispatch(addToGadgetsCart( new CartItem(product, 1)));
-    }
+    }, [])
+
+   
 
     function renderProducts() {
 
@@ -41,17 +48,18 @@ function GadgetStore(){
            
 
             return (
-                <div className="col" key={item.id} >
-                    <div className="card border-warning" >
-                        <div className="card-body text-success">
-                            <h5 className="card-title">{item.name}</h5>
-                            <p className="card-text">{item.description}</p>
-                            <p className="card-text text-primary">INR {item.price}</p>
-                            <button className="btn btn-primary" onClick={() => addToCart(item)}>Add To Cart</button>
-                        </div>
-                    </div>
-    
-                </div>
+
+                <ProductView product={item} key={item.id} onAdd={addToCart}/>
+                // <div className="col" key={item.id} >
+                //     <div className="card border-warning" >
+                //         <div className="card-body text-success">
+                //             <h5 className="card-title">{item.name}</h5>
+                //             <p className="card-text">{item.description}</p>
+                //             <p className="card-text text-primary">INR {item.price}</p>
+                //             <button className="btn btn-primary" onClick={() => addToCart(item)}>Add To Cart</button>
+                //         </div>
+                //     </div>
+                // </div>
             );
         })
         return (
@@ -65,6 +73,14 @@ function GadgetStore(){
     return (
         <div>
             <h1>Gadget Store</h1>
+
+            {isMessageVisible ? <div className='alert alert-info'>This is an example of React Redux</div> : null}
+            <div>
+                <button className='btn btn-info' onClick={() => setMessageVisible(pv => !pv)}>
+                    {isMessageVisible? "Hide" : "Show"}
+                </button>
+            </div>
+            <br/>
 
             <div>
                 {renderProducts()}

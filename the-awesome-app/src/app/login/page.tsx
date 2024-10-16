@@ -17,6 +17,8 @@ function LoginPage(){
 
     useEffect(() => {
         userNameInputRef.current?.focus();
+        document.title = document.title + " " + "Login";
+
     }, []);
 
 
