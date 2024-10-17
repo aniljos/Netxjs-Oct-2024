@@ -5,7 +5,7 @@ async function AboutPage(){
     //delay of 5 seconds
     await new Promise(resolve => setTimeout(resolve, 5000));
 
-    throw new Error("Some error happened");
+    //throw new Error("Some error happened");
 
     return (
         <div>

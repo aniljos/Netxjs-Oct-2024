@@ -1,5 +1,5 @@
 import Counter from "@/components/Counter";
-import Message from "@/components/Message";
+
 
 
 export default function Home() {

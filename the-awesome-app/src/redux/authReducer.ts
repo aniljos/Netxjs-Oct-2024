@@ -12,7 +12,7 @@ const initState: AuthState = {
     refreshToken: ""
 }
 //reducer
-export const authReducer = (currentState=initState, action) => {
+export const authReducer = (currentState=initState, action: {type: string, payload: AuthState}) => {
 
      //return the updated state;
     if(action.type === "store_tokens"){

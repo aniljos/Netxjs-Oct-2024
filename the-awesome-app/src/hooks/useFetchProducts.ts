@@ -33,7 +33,7 @@ export function useFetchProducts(url: string, isSecure: boolean){
 
         try {
 
-            let headers: {Authorization?: string} = {};
+            const headers: {Authorization?: string} = {};
             if(isSecure){
                 headers.Authorization = `Bearer ${auth.accessToken}`;
             }

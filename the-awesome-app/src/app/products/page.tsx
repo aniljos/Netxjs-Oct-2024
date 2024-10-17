@@ -2,7 +2,7 @@
 
 import { Product } from "@/model/Product";
 import axios from "axios";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 import styles from './page.module.css'
 import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
