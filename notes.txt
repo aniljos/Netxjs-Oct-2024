@@ -41,7 +41,14 @@ Nextjs 13 and above
 	All components are server componnents by default
 	Prior to Nextjs all components were client componet by default
 	In Nextjs 13 onwards use the directive 'use client' to create client components
+Props
+	Parameters to a components
+	<Message text="" color=""/>: text, color => props
+	function Message(props){}
 	
+	<Message>
+		<p>some content</p> => props.children
+	</Message>
 
 React State:
 	State updates are asynchronous
@@ -61,7 +68,8 @@ useEffect: Lifecycle events: mount, update & unmount
 	
 	If the list of depedencies is not empty then the callback is invoked on component update(can be called multiple times).
 	
-	
+	mount: DOM initialization, API calls on component load, Start timer, add listener(window/document)
+	unmount: Cancel and API call, clear timer, remove listener
 html
 	head
 		meta
@@ -93,8 +101,92 @@ css
 	
 Redux:
 	Action: an object, { type: 'update_the_counter', value: 10}, { type: 'clear_the_counter'}
-	Reducer: is a function, that receives an action and updates the store
+	Reducer: 
+		is a function, that receives an action and updates the store
+		Multiple reducers => combine the reducers to a single
+	Use Redux
+		libraries: npm i redux react-redux @reduxjs/toolkit
+		
+React redux
+	intergrates redux with react	
+	Provider => A component to integrate the store to the component heirarchy
+	Dispatch an action for a component: useDispatch hook
+	Subscribe and read the redux state: useSelector hook
+	Access the redux store: useStore hook
 	
-Use Redux
-	libraries: npm i redux react-redux @reduxjs/toolkit
+Redux Features
+	Action Creators: Helpers to create an action.
+	Reducers: 
+		state is immutable(makes it complex)
+		Keep the state mutable(makes it simple)
+		
+		reducer has to be synchronous: no async code 
+	Middleware:
+		Intercepts the actions
+		Validations, Loggings, Async code
+		Async code libraries: Redux Thunk, Redux Saga
+		
+@reduxjs/toolkit
+	slices => generate the action creators, reducer, state is mutable
+	middlewares: intergrates with Thunk and Saga
+	
+React/Nextjs Optimizations & Design
+	Keep the components small or granular
+	React.memo: 
+		function(higher-order function) for optimization
+		from React 16.3
+		It creates memoized(cache) copy of the component.When component is rerendered, it use the memoized copy
+		The copy is invalidated if the state or the props of the component changes.
+	useCallback: memoized copy of a callback.
+	useMemo: memoized copy of a value
+	
+	Reuseable: 
+		components
+		higher-order components(HOC): A function that returns a component
+		custom hook: 
+			A reusebale function that requires a hook.
+			useFetchProducts: 
+				Segregation of responsibilities
+				
+		
+	
+React context:
+   Low level API,
+   The implementations has to ensure the UI is rerender: useState, useReducer
+   
+Parent-Child
+	props is used pass data from the parent to child and vide-versa
+	from child to parents it a callback- pass the callback from parent to chaild using a prop, 
+				and the child invokes the callback(pass args to send to the parent)
+				
+	<ProductView product={item} key={item.id} onAdd={addToCart}/>
+	<input type="text" placeholder="Name" onchange="foo()"/>
+	
+SSR
+	The component(function) is invoked at runtime for each request, and the generated HTML is returned to the browser
+	
+SSG
+	The component(function) is invoked at build-time and the generated HTML is stored on the server as static HTML.
+	At runtime when a request comes, it just return the generated HTML(static)
+ISR
+	Used with SSG
+	The generated static HTML is re-generated in regular interval
+	
+	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+
+
+		
+
 	

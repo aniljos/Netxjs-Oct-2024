@@ -50,7 +50,7 @@ function Counter(props: CounterProps){
                 <button onClick={decr}>Decr</button>
             </div>
             <div>
-                Counter: <input type='number' value={counter} onChange={handleChange}/>
+                Counter: <input type='number' value={counter} onChange={handleChange} placeholder='ctr'/>
             </div>
             <br/>
             {counter > 10 ? <Message text='Hello'/> : null} 

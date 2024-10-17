@@ -32,12 +32,12 @@ export default async function CustomerPage(){
 }
 
 
-async function CustomerListing(){
+export async function CustomerListing(){
 
 
      //fetch the customers
     //delay of 5 secs
-    await new Promise(resolve => setTimeout(resolve, 7000));
+    await new Promise(resolve => setTimeout(resolve, 1000));
     const url = "http://localhost:9000/customers";
     //api call
     const resp = await fetch(url, {cache: 'no-store'});
